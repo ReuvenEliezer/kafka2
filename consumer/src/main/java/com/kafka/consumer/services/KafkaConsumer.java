@@ -22,8 +22,8 @@ public class KafkaConsumer {
 //                .build();
 //    }
 
-    @KafkaListener(topics = "topic1",
-            groupId = "myId",
+    @KafkaListener(topics = "${kafka.consumer.topic}",
+            groupId = "${kafka.consumer.group-id}",
             containerFactory = "kafkaListenerContainerFactory")
     public void listen(@Payload String message,
                        @Header(KafkaHeaders.ACKNOWLEDGMENT) Acknowledgment acknowledgment,

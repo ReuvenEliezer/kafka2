@@ -1,0 +1,8 @@
+kafka:
+  bootstrap:
+    address: localhost
+    port: 9092
+  consumer:
+    auto-offset-reset: earliest
+    topic: topic1
+    group-id: myId

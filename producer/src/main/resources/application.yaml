@@ -1,0 +1,6 @@
+kafka:
+#  bootstrap:
+#    address: localhost
+#    port: 9092
+  producer:
+    topic: topic1

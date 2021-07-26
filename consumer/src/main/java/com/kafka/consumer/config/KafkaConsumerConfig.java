@@ -27,8 +27,8 @@ public class KafkaConsumerConfig {
     }
 
 
-//    @Value(value = "${kafka.groupId}")
-//    private String groupId;
+    @Value(value = "${kafka.consumer.group-id}")
+    private String groupId;
 
     @Value(value = "${kafka.bootstrap.address}")
     private String bootstrapAddress;
@@ -36,14 +36,14 @@ public class KafkaConsumerConfig {
     @Value(value = "${kafka.bootstrap.port}")
     private String bootstrapPort;
 
-    @Value(value = "${kafka.auto.offset.reset}")
+    @Value(value = "${kafka.consumer.auto-offset-reset}")
     private String autoOffsetReset;
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress + ":" + bootstrapPort);
-//        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset); //earliest or latest
