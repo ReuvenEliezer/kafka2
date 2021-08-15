@@ -24,7 +24,7 @@ public class CustomSpringEventListener implements ApplicationListener<Applicatio
 
     private void startServer() throws IOException, InterruptedException {
         Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"C:/kafka/bin/windows/zookeeper-server-start.bat C:/kafka/config/zookeeper.properties\"");
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"C:/kafka/bin/windows/kafka-server-start.bat C:/kafka/config/server.properties\"");
     }
 
