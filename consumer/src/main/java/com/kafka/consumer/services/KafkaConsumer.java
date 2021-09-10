@@ -25,12 +25,12 @@ public class KafkaConsumer {
     @KafkaListener(topics = "${kafka.consumer.topic}",
             groupId = "${kafka.consumer.group-id}",
             containerFactory = "kafkaListenerContainerFactory")
-    public void listen(@Payload String message,
+    public void listen(@Payload byte[] message,
                        @Header(KafkaHeaders.ACKNOWLEDGMENT) Acknowledgment acknowledgment,
                        @Header(KafkaHeaders.OFFSET) int offSet,
                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName,
                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId) {
-        logger.info("Received Message {} on topic: {}, partitionId: {} offSet={}", message, topicName, partitionId, offSet);
+        logger.info("Received Message {} on topic: {}, partitionId: {} offSet={}", new String(message), topicName, partitionId, offSet);
         acknowledgment.acknowledge();
     }
 

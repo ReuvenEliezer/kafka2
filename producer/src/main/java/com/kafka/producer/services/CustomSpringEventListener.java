@@ -16,7 +16,7 @@ public class CustomSpringEventListener implements ApplicationListener<Applicatio
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
             removeOldsLogsFile();
-            startServer();
+            startServer(); //TODO only for kafka local
         } catch (Exception e) {
             e.printStackTrace();
         }

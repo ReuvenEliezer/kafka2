@@ -1,6 +1,6 @@
 kafka:
   bootstrap:
     address: localhost
-    port: 9092
+    port: 9092 # for kafka on docker replace it with 29092
   producer:
     topic: topic
