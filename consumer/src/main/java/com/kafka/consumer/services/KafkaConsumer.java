@@ -1,26 +1,26 @@
 package com.kafka.consumer.services;
 
+import com.kafka.consumer.utils.WsAddressConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class KafkaConsumer {
 
     private static final Logger logger = LogManager.getLogger(KafkaConsumer.class);
 
-//    @Bean
-//    public NewTopic topic() {
-//        return TopicBuilder.name("topic1")
-//                .partitions(1)
-//                .replicas(1)
-//                .build();
-//    }
+    @Autowired
+    private RestTemplate restTemplate;
 
     @KafkaListener(topics = "${kafka.consumer.topic}",
             groupId = "${kafka.consumer.group-id}",
@@ -31,6 +31,10 @@ public class KafkaConsumer {
                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName,
                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId) {
         logger.info("Received Message {} on topic: {}, partitionId: {} offSet={}", new String(message), topicName, partitionId, offSet);
+
+        //TODO async?
+        restTemplate.postForObject(WsAddressConstants.sendPayloadUrl , message, List.class);
+
         acknowledgment.acknowledge();
     }
 

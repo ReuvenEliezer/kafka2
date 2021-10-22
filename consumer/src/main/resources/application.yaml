@@ -1,3 +1,13 @@
+info:
+  app:
+    name: @project.artifactId@
+    version: @project.version@
+spring:
+  output:
+    ansi:
+      enabled: always
+server:
+  port: 8081
 kafka:
   bootstrap:
     address: localhost
