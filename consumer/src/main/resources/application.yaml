@@ -1,8 +1,9 @@
 info:
   app:
-    name: @project.artifactId@
     version: @project.version@
 spring:
+  application:
+    name: @project.artifactId@
   output:
     ansi:
       enabled: always
@@ -11,7 +12,7 @@ server:
 kafka:
   bootstrap:
     address: localhost
-    port: 9092 # for kafka on docker replace it with 29092
+    port: 29092
   consumer:
     auto-offset-reset: earliest
     topic: topic

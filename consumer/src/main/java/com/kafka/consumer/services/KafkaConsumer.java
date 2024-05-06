@@ -29,11 +29,10 @@ public class KafkaConsumer {
                        @Header(KafkaHeaders.ACKNOWLEDGMENT) Acknowledgment acknowledgment,
                        @Header(KafkaHeaders.OFFSET) int offSet,
                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName,
-                       @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId) {
+                       @Header(KafkaHeaders.RECEIVED_PARTITION) String partitionId) {
         logger.info("Received Message {} on topic: {}, partitionId: {} offSet={}", new String(message), topicName, partitionId, offSet);
 
-        //TODO async?
-        restTemplate.postForObject(WsAddressConstants.sendPayloadUrl , message, List.class);
+        restTemplate.postForObject(WsAddressConstants.sendPayloadUrl, message, Void.class);
 
         acknowledgment.acknowledge();
     }
